@@ -1,0 +1,22 @@
+{
+    "name": "nibblelab/boletobancario-php",
+    "description": "client for BoletoBancario's Boleto Fácil REST API",
+    "type": "library",
+    "license": "Apache-2.0",
+    "version": "1.0-stable",
+    "authors": [
+        {
+            "name": "Johnatas T. Freitas",
+            "email": "johnatas@nibblelab.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1.0",
+        "lib-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "BoletoFacil\\": "src/"
+        }
+    }
+}
