@@ -24,15 +24,15 @@
 
 namespace BoletoFacil\Payment;
 
-use BoletoFacil\Error\Errors;
-use BoletoFacil\Request\Request;
-use BoletoFacil\Request\RequestHTTPMethod;
-use BoletoFacil\Payment\PaymentItem;
-use BoletoFacil\Payment\Payer;
-use BoletoFacil\Payment\Response\PaymentResponse;
-use BoletoFacil\Payment\Response\PaymentResponseData;
-use BoletoFacil\Payment\Response\Charge;
-use BoletoFacil\Payment\Response\Payment;
+use \BoletoFacil\Error\Errors;
+use \BoletoFacil\Request\Request;
+use \BoletoFacil\Request\HTTPMethod;
+use \BoletoFacil\Payment\PaymentItem;
+use \BoletoFacil\Payment\Payer;
+use \BoletoFacil\Payment\Response\PaymentResponse;
+use \BoletoFacil\Payment\Response\PaymentResponseData;
+use \BoletoFacil\Payment\Response\Charge;
+use \BoletoFacil\Payment\Response\Payment;
 
 /**
  * Description of PaymentRequest
@@ -162,7 +162,7 @@ class PaymentRequest extends Request
                 $data['paymentAdvance'] = $config['paymentAdvance'];
             }
             
-            $result = $this->doRequest($config['url'] . 'issue-charge', $data, RequestHTTPMethod::POST);
+            $result = $this->doRequest($config['url'] . 'issue-charge', $data, HTTPMethod::POST);
             return $this->decodeResponse($result);
         } catch (Exception $ex) {
             throw  $ex;

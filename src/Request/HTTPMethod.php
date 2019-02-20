@@ -27,7 +27,7 @@ namespace BoletoFacil\Request;
 /**
  * Classe abstrata para enumerar os métodos HTTP disponíveis na API
  */
-abstract class RequestHTTPMethod
+abstract class HTTPMethod
 {
     /**
      * HTTP GET

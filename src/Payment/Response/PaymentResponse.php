@@ -24,7 +24,7 @@
 
 namespace BoletoFacil\Payment\Response;
 
-use BoletoFacil\Payment\Response\PaymentResponseData;
+use \BoletoFacil\Payment\Response\PaymentResponseData;
 
 
 /**

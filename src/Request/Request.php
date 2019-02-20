@@ -24,8 +24,8 @@
 
 namespace BoletoFacil\Request;
 
-use BoletoFacil\Error\Errors;
-use BoletoFacil\Request\RequestHTTPMethod;
+use \BoletoFacil\Error\Errors;
+use \BoletoFacil\Request\HTTPMethod;
 
 /**
  * Processamento de requisições na API
@@ -41,7 +41,7 @@ class Request
      * @return string
      * @throws \Exception
      */
-    protected function doRequest($url, $data, $http_method = RequestHTTPMethod::POST): string
+    protected function doRequest($url, $data, $http_method = HTTPMethod::POST): string
     {
         // verifique se a lib curl existe
         if(!function_exists('curl_init')) {
@@ -49,12 +49,12 @@ class Request
         }
         
         // se é requisição POST é obrigatório passar dados
-        if($http_method == RequestHTTPMethod::POST && empty($data)) {
+        if($http_method == HTTPMethod::POST && empty($data)) {
             throw new \Exception("Uma requisição POST não pode ser vazia",Errors::EMPTY_REQUEST);
         }
         
         // se está requisitando via get coloque os dada na url
-        if($http_method == RequestHTTPMethod::GET && !empty($data)) {
+        if($http_method == HTTPMethod::GET && !empty($data)) {
             if(is_array($data)) {
                 // é array. Converta para http query
                 $url .= '?' . http_build_query($data);
@@ -76,7 +76,7 @@ class Request
         // defina o timeout da requisição
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);
         
-        if($http_method == RequestHTTPMethod::POST) {
+        if($http_method == HTTPMethod::POST) {
             // se é post, configure o curl e envie os dados
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, $data);

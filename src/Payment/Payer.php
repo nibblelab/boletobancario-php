@@ -24,9 +24,9 @@
 
 namespace BoletoFacil\Payment;
 
-use BoletoFacil\Validation\ValidationDataConstants;
-use BoletoFacil\Validation\Validation;
-use BoletoFacil\Error\Errors;
+use \BoletoFacil\Validation\ValidationDataConstants;
+use \BoletoFacil\Validation\Validation;
+use \BoletoFacil\Error\Errors;
 
 /**
  * Dados do pagador
