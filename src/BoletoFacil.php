@@ -24,12 +24,13 @@
 
 namespace BoletoFacil;
 
-use BoletoFacil\Error\Errors;
-use BoletoFacil\Config\Config;
-use BoletoFacil\Payment\PaymentRequest;
-use BoletoFacil\Payment\PaymentItem;
-use BoletoFacil\Payment\Payer;
-use BoletoFacil\Payment\Response\PaymentResponse;
+use \BoletoFacil\Error\Errors;
+use \BoletoFacil\Config\Config;
+use \BoletoFacil\Payment\PaymentRequest;
+use \BoletoFacil\Payment\PaymentItem;
+use \BoletoFacil\Payment\Payer;
+use \BoletoFacil\Payment\Response\PaymentResponse;
+use BoletoFacil\Notification\NotificationRequest;
 
 /**
  * Façade para uso da API do boleto fácil
@@ -51,7 +52,8 @@ class BoletoFacil
         'creditCardHash' => '',
         'creditCardStore' => false,
         'creditCardId' => '',
-        'paymentAdvance' => false
+        'paymentAdvance' => false,
+        'paymentToken' => ''
     );
     /**
      * Dados do pagamento
@@ -71,14 +73,20 @@ class BoletoFacil
      * @var \BoletoFacil\Payment\Response\PaymentResponse 
      */
     private $response_payment;
+    /**
+     * Resposta da requisição de notificação
+     *
+     * @var \BoletoFacil\Notification\Response\NotificationResponse
+     */
+    private $response_notification;
     
     /**
      * 
      * @param string $token token do cliente
-     * @param string $url_notificacao url que receberá as notificações do pagamento
+     * @param string $url_notificacao url que receberá as notificações do pagamento. Opcional
      * @param bool $sandbox usa o modo sandbox ou não. Padrão = false
      */
-    public function __construct($token, $url_notificacao, $sandbox = false)
+    public function __construct($token, $url_notificacao = '', $sandbox = false)
     {
         $this->config['token'] = $token;
         if($sandbox) {
@@ -88,6 +96,26 @@ class BoletoFacil
             $this->config['url'] = Config::PRODUCTION_URL;
         }
         $this->config['notificationUrl'] = $url_notificacao;
+    }
+    
+    /**
+     * Obtêm a resposta da requisição de pagamento
+     * 
+     * @return \BoletoFacil\Payment\Response\PaymentResponse|null
+     */
+    public function getPaymentResponse(): ?\BoletoFacil\Payment\Response\PaymentResponse
+    {
+        return $this->response_payment;
+    }
+    
+    /**
+     * Obtêm a resposta da requisição de notificação
+     * 
+     * @return \BoletoFacil\Notification\Response\NotificationResponse|null
+     */
+    public function getNotificationResponse(): ?\BoletoFacil\Notification\Response\NotificationResponse
+    {
+        return $this->response_notification;
     }
     
     /**
@@ -259,7 +287,7 @@ class BoletoFacil
      * @throws \Exception
      */
     public function gerarPagtoCartaoTransparente(\BoletoFacil\Payment\PaymentItem $pagamento, 
-            \BoletoFacil\Payment\Payer $pagador, string $hash_cartao, string $id_cartao, 
+            \BoletoFacil\Payment\Payer $pagador, string $hash_cartao, string $id_cartao = '', 
             bool $armazenar_cartao = false, bool $antecipar = false): void
     {
         try
@@ -287,6 +315,40 @@ class BoletoFacil
             $this->pagador = $pagador;
             $this->response_payment = $this->execPayRequest();
             if($this->response_payment->hasError()){
+                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+            }
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+    
+    /**
+     * Processa uma notificação de pagamento
+     * 
+     * @return void
+     * @throws \Exception
+     * @throws \BoletoFacil\Exception
+     */
+    public function processarNotificacao(): void
+    {
+        /* veja se chegou algum dado de notificação */
+        if(!isset($_POST)) 
+        {
+            throw new \Exception("Nenhuma notificação recebida",Errors::NOTIFICATION_ERROR);
+        }
+        
+        if(!isset($_POST['paymentToken'])) 
+        {
+            throw new \Exception("O token do pagamento não foi fornecido",Errors::NOTIFICATION_ERROR);
+        }
+        
+        try
+        {
+            $this->config['paymentToken'] = $_POST['paymentToken'];
+        
+            $ntf = new NotificationRequest();
+            $this->response_notification = $ntf->request($this->config);
+            if($this->response_notification->hasError()){
                 throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
             }
         } catch (Exception $ex) {

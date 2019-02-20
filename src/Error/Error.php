@@ -53,5 +53,9 @@ abstract class Errors
      * Requisição incorreta
      */
     const INCORRECT_REQUEST = -6;
+    /**
+     * Erro na notificação
+     */
+    const NOTIFICATION_ERROR = -7;
 }
 

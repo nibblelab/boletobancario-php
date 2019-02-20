@@ -35,9 +35,7 @@ use \BoletoFacil\Payment\Response\Charge;
 use \BoletoFacil\Payment\Response\Payment;
 
 /**
- * Description of PaymentRequest
- *
- * @author johnatas
+ * Requisição de pagamento
  */
 class PaymentRequest extends Request
 {
