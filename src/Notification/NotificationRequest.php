@@ -81,7 +81,7 @@ class NotificationRequest extends Request
     /**
      * requisita detalhes de um pagamento à API
      * 
-     * @param array $config dados de configuração do pagamento
+     * @param array $config dados de configuração 
      * @return \BoletoFacil\Notification\Response\NotificationResponse|null
      * @throws \BoletoFacil\Notification\Exception
      */
@@ -100,4 +100,3 @@ class NotificationRequest extends Request
         }
     }
 }
-

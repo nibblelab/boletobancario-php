@@ -25,26 +25,14 @@
 namespace BoletoFacil\Payment\Response;
 
 use \BoletoFacil\Payment\Response\PaymentResponseData;
-
+use BoletoFacil\Response\Response;
 
 /**
  * Resposta à requisição de pagamento 
  * 
  */
-class PaymentResponse
+class PaymentResponse extends Response
 {
-    /**
-     * Status da resposta
-     *
-     * @var bool 
-     */
-    private $success;
-    /**
-     * Mensagem de erro
-     *
-     * @var string 
-     */
-    private $errorMessage;
     /**
      * Dados da resposta em caso de sucesso
      *
@@ -52,48 +40,6 @@ class PaymentResponse
      */
     private $data;
     
-    /**
-     * Obtêm a flag de sucesso
-     * 
-     * @return bool
-     */
-    public function getSuccess(): bool
-    {
-        return $this->success;
-    }
-
-    /**
-     * Seta a flag de sucesso
-     * 
-     * @param type $success
-     * @return void
-     */
-    public function setSuccess($success): void
-    {
-        $this->success = $success;
-    }
-
-    /**
-     * Obtêm a mensagem de erro
-     * 
-     * @return string
-     */
-    public function getErrorMessage(): string
-    {
-        return $this->errorMessage;
-    }
-
-    /**
-     * Seta a mensagem de erro
-     * 
-     * @param type $errorMessage
-     * @return void
-     */
-    public function setErrorMessage($errorMessage): void
-    {
-        $this->errorMessage = $errorMessage;
-    }
-
     /**
      * Obtêm os dados 
      * 
@@ -117,26 +63,6 @@ class PaymentResponse
 
     
     /* Métodos para facilitar o uso dos dados de resposta do pagamento  */
-
-    /**
-     * Verifica se a requisição deu erro
-     * 
-     * @return bool
-     */
-    public function hasError(): bool
-    {
-        return !$this->success;
-    }
-    
-    /**
-     * Obtêm a mensagem de erro
-     * 
-     * @return string
-     */
-    public function getError(): string
-    {
-        return $this->errorMessage;
-    }
     
     /**
      * Obtêm a url de checkout de um boleto

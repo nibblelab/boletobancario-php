@@ -24,48 +24,14 @@
 
 namespace BoletoFacil\Payment\Response;
 
+use BoletoFacil\Payment\PaymentData;
 
 /**
  * Detalhes do pagamento
  */
-class Payment
+class Payment extends PaymentData
 {
-    /**
-     * Identificador único do pagamento no Boleto Fácil
-     *
-     * @var int 
-     */
-    private $id;
-    /**
-     * Valor pago
-     *
-     * @var float
-     */
-    private $amount;
-    /**
-     * Data do registro do pagamento na instituição financeira
-     *
-     * @var \DateTime
-     */
-    private $date;
-    /**
-     * Taxa sobre o pagamento, em Reais.
-     *
-     * @var float
-     */
-    private $fee;
-    /**
-     * Tipo de pagamento, podendo ser: BOLETO, CREDIT_CARD ou INSTALLMENT_CREDIT_CARD
-     *
-     * @var string 
-     */
-    private $type;
-    /**
-     * Situação do pagamento, podendo ser: AUTHORIZED, DECLINED, FAILED, NOT_AUTHORIZED ou CONFIRMED
-     *
-     * @var string 
-     */
-    private $status;
+    
     /**
      * Identificação única do cartão de crédito
      *
@@ -73,127 +39,6 @@ class Payment
      */
     private $creditCardId;
     
-    /**
-     * Obtêm o identificador único do pagamento no Boleto Fácil
-     * 
-     * @return type
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Seta o identificador único do pagamento no Boleto Fácil
-     * 
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * Obtêm o valor pago
-     * 
-     * @return float
-     */
-    public function getAmount(): float
-    {
-        return $this->amount;
-    }
-
-    /**
-     * Seta o valor pago
-     * 
-     * @param float $amount
-     */
-    public function setAmount($amount)
-    {
-        $this->amount = $amount;
-    }
-
-    /**
-     * 
-     * Obtêm a data do registro do pagamento na instituição financeira
-     * 
-     * @return \DateTime
-     */
-    public function getDate(): \DateTime
-    {
-        return $this->date;
-    }
-
-    /**
-     * Seta a data do registro do pagamento na instituição financeira
-     * 
-     * @param \DateTime $date
-     */
-    public function setDate(\DateTime $date)
-    {
-        $this->date = $date;
-    }
-
-    /**
-     * Obtêm a taxa sobre o pagamento, em Reais.
-     * 
-     * @return float
-     */
-    public function getFee(): float
-    {
-        return $this->fee;
-    }
-
-    /**
-     * Seta a taxa sobre o pagamento, em Reais.
-     * 
-     * @param float $fee
-     */
-    public function setFee($fee)
-    {
-        $this->fee = $fee;
-    }
-
-    /**
-     * Obtêm o tipo de pagamento
-     * 
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * Seta o tipo de pagamento
-     * 
-     * @param string $type
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    /**
-     * Obtêm a situação do pagamento
-     * 
-     * @return string
-     */
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    /**
-     * Seta a situação do pagamento
-     * 
-     * @param string $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
     /**
      * Obtêm a identificação única do cartão de crédito
      * 

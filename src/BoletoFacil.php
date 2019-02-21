@@ -29,8 +29,11 @@ use \BoletoFacil\Config\Config;
 use \BoletoFacil\Payment\PaymentRequest;
 use \BoletoFacil\Payment\PaymentItem;
 use \BoletoFacil\Payment\Payer;
-use \BoletoFacil\Payment\Response\PaymentResponse;
 use BoletoFacil\Notification\NotificationRequest;
+use \BoletoFacil\Payment\Response\PaymentResponse;
+use BoletoFacil\Fetch\FetchRequest;
+use BoletoFacil\Fetch\FetchType;
+use BoletoFacil\Fetch\Response\FetchResponse;
 
 /**
  * Façade para uso da API do boleto fácil
@@ -79,6 +82,12 @@ class BoletoFacil
      * @var \BoletoFacil\Notification\Response\NotificationResponse
      */
     private $response_notification;
+    /**
+     * Resposta da requisição de busca
+     *
+     * @var \BoletoFacil\Fetch\Response\FetchResponse
+     */
+    private $response_fetch;
     
     /**
      * 
@@ -116,6 +125,16 @@ class BoletoFacil
     public function getNotificationResponse(): ?\BoletoFacil\Notification\Response\NotificationResponse
     {
         return $this->response_notification;
+    }
+    
+    /**
+     * Obtêm a resposta da requisiçãode busca
+     * 
+     * @return \BoletoFacil\Fetch\Response\FetchResponse|null
+     */
+    public function getFetchResponse(): ?\BoletoFacil\Fetch\Response\FetchResponse
+    {
+        return $this->response_fetch;
     }
     
     /**
@@ -355,7 +374,107 @@ class BoletoFacil
             throw $ex;
         }
     }
+    
+    /**
+     * Executa a requisição de busca propriamente dita
+     * 
+     * @param FetchType $type parâmetro de busca para a data
+     * @param string $data_inicial data inicial da busca
+     * @param string $data_final data final da busca. Opcional
+     * @return FetchResponse|null
+     * @throws \Exception
+     */
+    private function execFetchRequest(\BoletoFacil\Fetch\FetchType $type, $data_inicial, $data_final = ''): ?\BoletoFacil\Fetch\Response\FetchResponse 
+    {
+        if(empty($data_inicial))
+        {
+            throw new \Exception("A data inicial deve ser fornecida",Errors::FETCH_ERROR);
+        }
         
+        $dt_ini = \DateTime::createFromFormat("d/m/Y", $data_inicial);
+        if($dt_ini === false || array_sum($dt_ini->getLastErrors()) > 0) {
+            throw new \Exception("A data inicial deve estar no formato DD/MM/YYYY",Errors::FETCH_ERROR);
+        }
+        
+        if(!empty($data_final)) {
+            $dt_end = \DateTime::createFromFormat("d/m/Y", $data_final);
+            if($dt_end === false || array_sum($dt_end->getLastErrors()) > 0) {
+                throw new \Exception("A data final deve estar no formato DD/MM/YYYY",Errors::FETCH_ERROR);
+            }
+        }
+        
+        $fetch = new FetchRequest();
+        return $fetch->request($this->config, $type, $data_inicial, $data_final);
+    }
+    
+    /**
+     * Busca os pagamentos pela data de vencimento
+     * 
+     * @param string $data_inicial data inicial da busca, no formato DD/MM/YYYY
+     * @param string $data_final data final da busca, no formato DD/MM/YYYY. Opcional
+     * @return array|null
+     * @throws \Exception
+     * @throws \BoletoFacil\Exception
+     */
+    public function buscarPagamentosPorDataVencimento($data_inicial, $data_final = ''): ?array
+    {
+        try
+        {
+            $this->response_fetch = $this->execFetchRequest(FetchType::DATA_VENCIMENTO, $data_inicial, $data_final);
+            if($this->response_fetch->hasError()){
+                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+            }
+            return $this->response_fetch->todasAsCobrancas();
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+    
+    /**
+     * Busca os pagamentos pela data de pagamento
+     * 
+     * @param string $data_inicial data inicial da busca, no formato DD/MM/YYYY
+     * @param string $data_final data final da busca, no formato DD/MM/YYYY. Opcional
+     * @return array|null
+     * @throws \BoletoFacil\Exception
+     * @throws \Exception
+     */
+    public function buscarPagamentosPorDataPagto($data_inicial, $data_final = ''): ?array
+    {
+        try
+        {
+            $this->response_fetch = $this->execFetchRequest(FetchType::DATA_PAGAMENTO, $data_inicial, $data_final);
+            if($this->response_fetch->hasError()){
+                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+            }
+            return $this->response_fetch->todasAsCobrancas();
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+    
+    /**
+     * Busca os pagamentos pela data de confirmação de pagamento
+     * 
+     * @param string $data_inicial data inicial da busca, no formato DD/MM/YYYY
+     * @param string $data_final data final da busca, no formato DD/MM/YYYY. Opcional
+     * @return array|null
+     * @throws \BoletoFacil\Exception
+     * @throws \Exception
+     */
+    public function buscarPagamentosPorDataConfirmacaoPagto($data_inicial, $data_final = ''): ?array
+    {
+        try
+        {
+            $this->response_fetch = $this->execFetchRequest(FetchType::DATA_CONFIRMACAO, $data_inicial, $data_final);
+            if($this->response_fetch->hasError()){
+                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+            }
+            return $this->response_fetch->todasAsCobrancas();
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
 }
 
 

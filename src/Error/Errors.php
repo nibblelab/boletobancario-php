@@ -22,22 +22,44 @@
  *
  */
 
-include '../vendor/autoload.php';
+namespace BoletoFacil\Error;
 
-use \BoletoFacil\BoletoFacil;
+/**
+ * Enumeração de erros possíveis
+ */
+abstract class Errors
+{
+    /**
+     * lib curl não está presente
+     */
+    const CURL_NOT_FOUND = -1;
+    /**
+     * Requisição vazia
+     */
+    const EMPTY_REQUEST = -2;
+    /**
+     * Erro no curl
+     */
+    const CURL_ERROR = -3;
+    /**
+     * Erro de validação dos dados
+     */
+    const VALIDATION_ERROR = -4;
+    /**
+     * Erro ao processar a requisição
+     */
+    const REQUEST_ERROR = -5;
+    /**
+     * Requisição incorreta
+     */
+    const INCORRECT_REQUEST = -6;
+    /**
+     * Erro na notificação
+     */
+    const NOTIFICATION_ERROR = -7;
+    /**
+     * Erro na busca
+     */
+    const FETCH_ERROR = -8;
+}
 
-$token = "meu_token_sandbox";
-try
-{
-    $b = new BoletoFacil($token,"",true);
-    $b->processarNotificacao();
-    
-    echo 'valor pago = ' . $b->getNotificationResponse()->getValorPago() . '<br>';
-    echo 'valor das taxas = ' . $b->getNotificationResponse()->getValorTaxas() . '<br>';
-    echo 'valor cobrado = ' . $b->getNotificationResponse()->getValorCobrado() . '<br>';
-    echo 'referência = ' . $b->getNotificationResponse()->getPagtoReferencia() . '<br>';
-}
-catch(Exception $ex)
-{
-    echo $ex->getMessage();
-}

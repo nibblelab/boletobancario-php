@@ -25,24 +25,13 @@
 namespace BoletoFacil\Notification\Response;
 
 use BoletoFacil\Notification\Response\NotificationResponseData;
+use BoletoFacil\Response\Response;
 
 /**
  * Resposta da Notificação
  */
-class NotificationResponse
+class NotificationResponse extends Response
 {
-    /**
-     * Status da resposta
-     *
-     * @var bool 
-     */
-    private $success;
-    /**
-     * Mensagem de erro
-     *
-     * @var string 
-     */
-    private $errorMessage;
     /**
      * Dados da resposta em caso de sucesso
      *
@@ -50,49 +39,6 @@ class NotificationResponse
      */
     private $data;
     
-    
-    /**
-     * Obtêm a flag de sucesso
-     * 
-     * @return bool
-     */
-    public function getSuccess(): bool
-    {
-        return $this->success;
-    }
-
-    /**
-     * Seta a flag de sucesso
-     * 
-     * @param type $success
-     * @return void
-     */
-    public function setSuccess($success): void
-    {
-        $this->success = $success;
-    }
-
-    /**
-     * Obtêm a mensagem de erro
-     * 
-     * @return string
-     */
-    public function getErrorMessage(): string
-    {
-        return $this->errorMessage;
-    }
-
-    /**
-     * Seta a mensagem de erro
-     * 
-     * @param type $errorMessage
-     * @return void
-     */
-    public function setErrorMessage($errorMessage): void
-    {
-        $this->errorMessage = $errorMessage;
-    }
-
     /**
      * Obtêm os dados 
      * 
@@ -116,26 +62,6 @@ class NotificationResponse
 
     
     /* Métodos para facilitar o uso dos dados de resposta da notificação */
-
-    /**
-     * Verifica se a requisição deu erro
-     * 
-     * @return bool
-     */
-    public function hasError(): bool
-    {
-        return !$this->success;
-    }
-    
-    /**
-     * Obtêm a mensagem de erro
-     * 
-     * @return string
-     */
-    public function getError(): string
-    {
-        return $this->errorMessage;
-    }
     
     /**
      * Obtêm a referência do pagamento

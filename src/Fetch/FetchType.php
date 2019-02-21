@@ -22,22 +22,24 @@
  *
  */
 
-include '../vendor/autoload.php';
+namespace BoletoFacil\Fetch;
 
-use \BoletoFacil\BoletoFacil;
 
-$token = "meu_token_sandbox";
-try
+/**
+ * Enumeração de parâmetro de busca
+ */
+abstract class FetchType
 {
-    $b = new BoletoFacil($token,"",true);
-    $b->processarNotificacao();
-    
-    echo 'valor pago = ' . $b->getNotificationResponse()->getValorPago() . '<br>';
-    echo 'valor das taxas = ' . $b->getNotificationResponse()->getValorTaxas() . '<br>';
-    echo 'valor cobrado = ' . $b->getNotificationResponse()->getValorCobrado() . '<br>';
-    echo 'referência = ' . $b->getNotificationResponse()->getPagtoReferencia() . '<br>';
-}
-catch(Exception $ex)
-{
-    echo $ex->getMessage();
+    /**
+     * Pela data de vencimento
+     */
+    const DATA_VENCIMENTO = 1;
+    /**
+     * Pela data de pagamento
+     */
+    const DATA_PAGAMENTO = 2;
+    /**
+     * Pela data de confirmação
+     */
+    const DATA_CONFIRMACAO = 3;
 }

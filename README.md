@@ -208,3 +208,104 @@ catch(Exception $ex)
     echo $ex->getMessage();
 }
 ```
+
+## Busca de pagamentos
+
+### Pela data de vencimento
+
+```
+include './vendor/autoload.php';
+
+use BoletoFacil\BoletoFacil;
+
+$token = "seu_token"; # token de produção ou sandbox
+try
+{
+    //$b = new BoletoFacil($token,"",true); # modo sandbox
+    $b = new BoletoFacil($token); # modo produção
+    $pagamentos = $b->buscarPagamentosPorDataVencimento('99/99/9999'); # busca os pagamentos que venceram após a data fornecida
+    # itere sobre os pagamentos
+    foreach($pagamentos as $pagto)
+    {
+        $data_vencimento = $pagto->getDueDate(); # data de vencimento
+        # liste os pagamentos do registro
+        foreach($pagto->todosOsPagamentos() as $p) {
+            $data_pagto = $p->getDate(); # data do pagamento
+            $valor_pago = $p->getAmount(); # valor pago
+            $valor_taxas = $p->getFee(); # valor das taxas
+            $tipo_pagto = $p->getType(); # tipo do pagamento
+            $status_pagto = $p->getStatus(); # status do pagamento
+        }
+    }
+}
+catch(Exception $ex)
+{
+    echo $ex->getMessage();
+}
+```
+
+### Pela data de pagamento
+
+```
+include './vendor/autoload.php';
+
+use BoletoFacil\BoletoFacil;
+
+$token = "seu_token"; # token de produção ou sandbox
+try
+{
+    //$b = new BoletoFacil($token,"",true); # modo sandbox
+    $b = new BoletoFacil($token); # modo produção
+    $pagamentos = $b->buscarPagamentosPorDataPagto('99/99/9999'); # busca os pagamentos que venceram após a data fornecida
+    # itere sobre os pagamentos
+    foreach($pagamentos as $pagto)
+    {
+        $data_vencimento = $pagto->getDueDate(); # data de vencimento
+        # liste os pagamentos do registro
+        foreach($pagto->todosOsPagamentos() as $p) {
+            $data_pagto = $p->getDate(); # data do pagamento
+            $valor_pago = $p->getAmount(); # valor pago
+            $valor_taxas = $p->getFee(); # valor das taxas
+            $tipo_pagto = $p->getType(); # tipo do pagamento
+            $status_pagto = $p->getStatus(); # status do pagamento
+        }
+    }
+}
+catch(Exception $ex)
+{
+    echo $ex->getMessage();
+}
+```
+
+### Pela data de confirmação de pagamento
+
+```
+include './vendor/autoload.php';
+
+use BoletoFacil\BoletoFacil;
+
+$token = "seu_token"; # token de produção ou sandbox
+try
+{
+    //$b = new BoletoFacil($token,"",true); # modo sandbox
+    $b = new BoletoFacil($token); # modo produção
+    $pagamentos = $b->buscarPagamentosPorDataConfirmacaoPagto('99/99/9999'); # busca os pagamentos que venceram após a data fornecida
+    # itere sobre os pagamentos
+    foreach($pagamentos as $pagto)
+    {
+        $data_vencimento = $pagto->getDueDate(); # data de vencimento
+        # liste os pagamentos do registro
+        foreach($pagto->todosOsPagamentos() as $p) {
+            $data_pagto = $p->getDate(); # data do pagamento
+            $valor_pago = $p->getAmount(); # valor pago
+            $valor_taxas = $p->getFee(); # valor das taxas
+            $tipo_pagto = $p->getType(); # tipo do pagamento
+            $status_pagto = $p->getStatus(); # status do pagamento
+        }
+    }
+}
+catch(Exception $ex)
+{
+    echo $ex->getMessage();
+}
+```

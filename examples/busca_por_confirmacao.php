@@ -26,18 +26,34 @@ include '../vendor/autoload.php';
 
 use \BoletoFacil\BoletoFacil;
 
+
 $token = "meu_token_sandbox";
 try
 {
     $b = new BoletoFacil($token,"",true);
-    $b->processarNotificacao();
-    
-    echo 'valor pago = ' . $b->getNotificationResponse()->getValorPago() . '<br>';
-    echo 'valor das taxas = ' . $b->getNotificationResponse()->getValorTaxas() . '<br>';
-    echo 'valor cobrado = ' . $b->getNotificationResponse()->getValorCobrado() . '<br>';
-    echo 'referência = ' . $b->getNotificationResponse()->getPagtoReferencia() . '<br>';
+    $pagtos = $b->buscarPagamentosPorDataConfirmacaoPagto('01/01/2019');
+    // liste todos
+    foreach($pagtos as $pagto) {
+        echo ' data vencimento = ' . $pagto->getDueDate()->format('d/m/Y') . '<br>';
+        foreach($pagto->todosOsPagamentos() as $p) {
+            echo ' data pagto = ' . $p->getDate()->format('d/m/Y') . '<br>';
+        }
+    }
+    // liste um específico
+    if(count($pagtos) >= 1) {
+        $pagto = $b->getFetchResponse()->dadosCobranca(1);
+        echo ' data vencimento = ' . $pagto->getDueDate()->format('d/m/Y') . '<br>';
+        // também liste específico dos detalhes do pagto
+        $detalhes = $pagto->todosOsPagamentos();
+        if(count($detalhes) >= 1) {
+            $p = $pagto->dadosPagamento(1);
+            echo ' data pagto = ' . $p->getDate()->format('d/m/Y') . '<br>';
+        }
+        
+    }
 }
 catch(Exception $ex)
 {
     echo $ex->getMessage();
 }
+
