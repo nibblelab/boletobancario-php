@@ -284,7 +284,7 @@ class BoletoFacil
             $this->pagador = $pagador;
             $this->response_payment = $this->execPayRequest();
             if($this->response_payment->hasError()){
-                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+                throw new \Exception("O resultado não pode ser obtido: " . $this->response_payment->getError(),Errors::REQUEST_ERROR);
             }
             return $this->response_payment->getCheckoutURLBoleto();
         } catch (Exception $ex) {
@@ -334,7 +334,7 @@ class BoletoFacil
             $this->pagador = $pagador;
             $this->response_payment = $this->execPayRequest();
             if($this->response_payment->hasError()){
-                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+                throw new \Exception("O resultado não pode ser obtido: " . $this->response_payment->getError(),Errors::REQUEST_ERROR);
             }
         } catch (Exception $ex) {
             throw $ex;
@@ -368,7 +368,7 @@ class BoletoFacil
             $ntf = new NotificationRequest();
             $this->response_notification = $ntf->request($this->config);
             if($this->response_notification->hasError()){
-                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+                throw new \Exception("O resultado não pode ser obtido: ".$this->response_notification->getError(),Errors::REQUEST_ERROR);
             }
         } catch (Exception $ex) {
             throw $ex;
@@ -422,7 +422,7 @@ class BoletoFacil
         {
             $this->response_fetch = $this->execFetchRequest(FetchType::DATA_VENCIMENTO, $data_inicial, $data_final);
             if($this->response_fetch->hasError()){
-                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+                throw new \Exception("O resultado não pode ser obtido: ".$this->response_fetch->getError(),Errors::REQUEST_ERROR);
             }
             return $this->response_fetch->todasAsCobrancas();
         } catch (Exception $ex) {
@@ -445,7 +445,7 @@ class BoletoFacil
         {
             $this->response_fetch = $this->execFetchRequest(FetchType::DATA_PAGAMENTO, $data_inicial, $data_final);
             if($this->response_fetch->hasError()){
-                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+                throw new \Exception("O resultado não pode ser obtido: ".$this->response_fetch->getError(),Errors::REQUEST_ERROR);
             }
             return $this->response_fetch->todasAsCobrancas();
         } catch (Exception $ex) {
@@ -468,7 +468,7 @@ class BoletoFacil
         {
             $this->response_fetch = $this->execFetchRequest(FetchType::DATA_CONFIRMACAO, $data_inicial, $data_final);
             if($this->response_fetch->hasError()){
-                throw new \Exception("O resultado não pode ser obtido",Errors::REQUEST_ERROR);
+                throw new \Exception("O resultado não pode ser obtido: ".$this->response_fetch->getError(),Errors::REQUEST_ERROR);
             }
             return $this->response_fetch->todasAsCobrancas();
         } catch (Exception $ex) {

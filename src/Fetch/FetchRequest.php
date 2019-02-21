@@ -107,6 +107,7 @@ class FetchRequest extends Request
     {
         try {
             $data = array(
+                'token' => $config['token'],
                 'responseType' => $config['responseType']
             );
             if($type == FetchType::DATA_VENCIMENTO) {
