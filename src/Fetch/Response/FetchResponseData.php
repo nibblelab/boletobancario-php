@@ -114,9 +114,9 @@ class FetchResponseData
     /**
      * Obtêm o link para visualização/download do boleto ou carnê
      * 
-     * @return string
+     * @return string|null
      */
-    public function getLink(): string
+    public function getLink(): ?string
     {
         return $this->link;
     }
@@ -135,9 +135,9 @@ class FetchResponseData
     /**
      * Obtêm o link para visualização/download do boleto (em caso de parcelamento)
      * 
-     * @return string
+     * @return string|null
      */
-    public function getInstallmentLink(): string
+    public function getInstallmentLink(): ?string
     {
         return $this->installmentLink;
     }
@@ -156,9 +156,9 @@ class FetchResponseData
     /**
      * Obtêm a linha digitável para pagamento online
      * 
-     * @return string
+     * @return string|null
      */
-    public function getPayNumber(): string
+    public function getPayNumber(): ?string
     {
         return $this->payNumber;
     }

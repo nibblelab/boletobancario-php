@@ -69,16 +69,20 @@ class FetchRequest extends Request
                 $response_data->setInstallmentLink($charge->installmentLink);
                 $response_data->setPayNumber($charge->payNumber);
                 $pagamentos = array();
-                foreach($charge->payments as $pay) {
-                    $payment_data = new Payment();
-                    $payment_data->setId($pay->id);
-                    $payment_data->setAmount($pay->amount);
-                    $dt_p = \DateTime::createFromFormat("d/m/Y", $pay->date);
-                    $payment_data->setDate($dt_p);
-                    $payment_data->setFee($pay->fee);
-                    $payment_data->setType($pay->type);
-                    $payment_data->setStatus($pay->status);
-                    $pagamentos[] = $payment_data;
+                if(property_exists($charge, 'payments'))
+                {
+                    // há dados de pagamento via cartão
+                    foreach($charge->payments as $pay) {
+                        $payment_data = new Payment();
+                        $payment_data->setId($pay->id);
+                        $payment_data->setAmount($pay->amount);
+                        $dt_p = \DateTime::createFromFormat("d/m/Y", $pay->date);
+                        $payment_data->setDate($dt_p);
+                        $payment_data->setFee($pay->fee);
+                        $payment_data->setType($pay->type);
+                        $payment_data->setStatus($pay->status);
+                        $pagamentos[] = $payment_data;
+                    }
                 }
                 $response_data->setPayments($pagamentos);
                 $cobrancas[] = $response_data;

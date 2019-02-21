@@ -230,6 +230,10 @@ class BoletoFacil
     {
         try
         {
+            if(empty($pagador->getEmail())) {
+                // cartão obriga o uso de e-mail
+                throw new \Exception("O e-mail do pagador precisa ser informado",Errors::INCORRECT_REQUEST);
+            }
             if($pagamento->getParcelas() > 12) {
                 // cartão não pode parcelar em mais do que 12 vezes
                 throw new \Exception("O parcelamento máximo para cartão de crédito é em 12 vezes",Errors::INCORRECT_REQUEST);
@@ -268,6 +272,10 @@ class BoletoFacil
     {
         try
         {
+            if(empty($pagador->getEmail())) {
+                // cartão obriga o uso de e-mail
+                throw new \Exception("O e-mail do pagador precisa ser informado",Errors::INCORRECT_REQUEST);
+            }
             if($pagamento->getParcelas() > 12) {
                 // cartão não pode parcelar em mais do que 12 vezes
                 throw new \Exception("O parcelamento máximo para cartão de crédito é em 12 vezes",Errors::INCORRECT_REQUEST);
@@ -311,6 +319,10 @@ class BoletoFacil
     {
         try
         {
+            if(empty($pagador->getEmail())) {
+                // cartão obriga o uso de e-mail
+                throw new \Exception("O e-mail do pagador precisa ser informado",Errors::INCORRECT_REQUEST);
+            }
             if($pagamento->getParcelas() > 12) {
                 // cartão não pode parcelar em mais do que 12 vezes
                 throw new \Exception("O parcelamento máximo para cartão de crédito é em 12 vezes",Errors::INCORRECT_REQUEST);
@@ -408,7 +420,7 @@ class BoletoFacil
     }
     
     /**
-     * Busca os pagamentos pela data de vencimento
+     * Busca as cobranças pela data de vencimento
      * 
      * @param string $data_inicial data inicial da busca, no formato DD/MM/YYYY
      * @param string $data_final data final da busca, no formato DD/MM/YYYY. Opcional
@@ -416,7 +428,7 @@ class BoletoFacil
      * @throws \Exception
      * @throws \BoletoFacil\Exception
      */
-    public function buscarPagamentosPorDataVencimento($data_inicial, $data_final = ''): ?array
+    public function buscarCobrancasPorDataVencimento($data_inicial, $data_final = ''): ?array
     {
         try
         {
@@ -431,7 +443,7 @@ class BoletoFacil
     }
     
     /**
-     * Busca os pagamentos pela data de pagamento
+     * Busca as cobranças pela data de pagamento
      * 
      * @param string $data_inicial data inicial da busca, no formato DD/MM/YYYY
      * @param string $data_final data final da busca, no formato DD/MM/YYYY. Opcional
@@ -439,7 +451,7 @@ class BoletoFacil
      * @throws \BoletoFacil\Exception
      * @throws \Exception
      */
-    public function buscarPagamentosPorDataPagto($data_inicial, $data_final = ''): ?array
+    public function buscarCobrancasPorDataPagto($data_inicial, $data_final = ''): ?array
     {
         try
         {
@@ -454,7 +466,7 @@ class BoletoFacil
     }
     
     /**
-     * Busca os pagamentos pela data de confirmação de pagamento
+     * Busca as cobranças pela data de confirmação de pagamento
      * 
      * @param string $data_inicial data inicial da busca, no formato DD/MM/YYYY
      * @param string $data_final data final da busca, no formato DD/MM/YYYY. Opcional
@@ -462,7 +474,7 @@ class BoletoFacil
      * @throws \BoletoFacil\Exception
      * @throws \Exception
      */
-    public function buscarPagamentosPorDataConfirmacaoPagto($data_inicial, $data_final = ''): ?array
+    public function buscarCobrancasPorDataConfirmacaoPagto($data_inicial, $data_final = ''): ?array
     {
         try
         {

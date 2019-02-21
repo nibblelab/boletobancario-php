@@ -31,25 +31,24 @@ $token = "meu_token_sandbox";
 try
 {
     $b = new BoletoFacil($token,"",true);
-    $pagtos = $b->buscarPagamentosPorDataConfirmacaoPagto('01/01/2019');
+    $cobrancas = $b->buscarCobrancasPorDataConfirmacaoPagto('01/01/2019');
     // liste todos
-    foreach($pagtos as $pagto) {
-        echo ' data vencimento = ' . $pagto->getDueDate()->format('d/m/Y') . '<br>';
-        foreach($pagto->todosOsPagamentos() as $p) {
+    foreach($cobrancas as $c) {
+        echo ' data vencimento = ' . $c->getDueDate()->format('d/m/Y') . '<br>';
+        foreach($c->todosOsPagamentos() as $p) {
             echo ' data pagto = ' . $p->getDate()->format('d/m/Y') . '<br>';
         }
     }
     // liste um específico
-    if(count($pagtos) >= 1) {
-        $pagto = $b->getFetchResponse()->dadosCobranca(1);
-        echo ' data vencimento = ' . $pagto->getDueDate()->format('d/m/Y') . '<br>';
+    if(count($cobrancas) >= 1) {
+        $c = $b->getFetchResponse()->dadosCobranca(1);
+        echo ' data vencimento = ' . $c->getDueDate()->format('d/m/Y') . '<br>';
         // também liste específico dos detalhes do pagto
-        $detalhes = $pagto->todosOsPagamentos();
+        $detalhes = $c->todosOsPagamentos();
         if(count($detalhes) >= 1) {
-            $p = $pagto->dadosPagamento(1);
+            $p = $c->dadosPagamento(1);
             echo ' data pagto = ' . $p->getDate()->format('d/m/Y') . '<br>';
         }
-        
     }
 }
 catch(Exception $ex)

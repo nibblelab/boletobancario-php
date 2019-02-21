@@ -234,7 +234,7 @@ catch(Exception $ex)
 ```
 
 
-## Busca de pagamentos
+## Busca de cobranças
 
 
 ### Pela data de vencimento
@@ -250,13 +250,13 @@ try
 {
     //$b = new BoletoFacil($token,"",true); # modo sandbox
     $b = new BoletoFacil($token); # modo produção
-    $pagamentos = $b->buscarPagamentosPorDataVencimento('99/99/9999'); # busca os pagamentos que venceram após a data fornecida
-    # itere sobre os pagamentos
-    foreach($pagamentos as $pagto)
+    $pagamentos = $b->buscarCobrancasPorDataVencimento('99/99/9999'); # busca as cobranças que venceram após a data fornecida
+    # itere 
+    foreach($cobrancas as $c)
     {
-        $data_vencimento = $pagto->getDueDate(); # data de vencimento
+        $data_vencimento = $c->getDueDate(); # data de vencimento
         # liste os pagamentos do registro
-        foreach($pagto->todosOsPagamentos() as $p) {
+        foreach($c->todosOsPagamentos() as $p) {
             $data_pagto = $p->getDate(); # data do pagamento
             $valor_pago = $p->getAmount(); # valor pago
             $valor_taxas = $p->getFee(); # valor das taxas
@@ -285,13 +285,13 @@ try
 {
     //$b = new BoletoFacil($token,"",true); # modo sandbox
     $b = new BoletoFacil($token); # modo produção
-    $pagamentos = $b->buscarPagamentosPorDataPagto('99/99/9999'); # busca os pagamentos que foram pagos após a data fornecida
-    # itere sobre os pagamentos
-    foreach($pagamentos as $pagto)
+    $cobrancas = $b->buscarCobrancasPorDataPagto('99/99/9999'); # busca as cobranças que foram pagas após a data fornecida
+    # itere 
+    foreach($cobrancas as $c)
     {
-        $data_vencimento = $pagto->getDueDate(); # data de vencimento
+        $data_vencimento = $c->getDueDate(); # data de vencimento
         # liste os pagamentos do registro
-        foreach($pagto->todosOsPagamentos() as $p) {
+        foreach($c->todosOsPagamentos() as $p) {
             $data_pagto = $p->getDate(); # data do pagamento
             $valor_pago = $p->getAmount(); # valor pago
             $valor_taxas = $p->getFee(); # valor das taxas
@@ -320,13 +320,13 @@ try
 {
     //$b = new BoletoFacil($token,"",true); # modo sandbox
     $b = new BoletoFacil($token); # modo produção
-    $pagamentos = $b->buscarPagamentosPorDataConfirmacaoPagto('99/99/9999'); # busca os pagamentos que foram confirmados após a data fornecida
-    # itere sobre os pagamentos
-    foreach($pagamentos as $pagto)
+    $cobrancas = $b->buscarCobrancasPorDataConfirmacaoPagto('99/99/9999'); # busca as cobranças que tiveram pagamento confirmado após a data fornecida
+    # itere 
+    foreach($cobrancas as $c)
     {
-        $data_vencimento = $pagto->getDueDate(); # data de vencimento
+        $data_vencimento = $c->getDueDate(); # data de vencimento
         # liste os pagamentos do registro
-        foreach($pagto->todosOsPagamentos() as $p) {
+        foreach($c->todosOsPagamentos() as $p) {
             $data_pagto = $p->getDate(); # data do pagamento
             $valor_pago = $p->getAmount(); # valor pago
             $valor_taxas = $p->getFee(); # valor das taxas
