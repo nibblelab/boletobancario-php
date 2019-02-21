@@ -285,7 +285,7 @@ try
 {
     //$b = new BoletoFacil($token,"",true); # modo sandbox
     $b = new BoletoFacil($token); # modo produção
-    $pagamentos = $b->buscarPagamentosPorDataPagto('99/99/9999'); # busca os pagamentos que venceram após a data fornecida
+    $pagamentos = $b->buscarPagamentosPorDataPagto('99/99/9999'); # busca os pagamentos que foram pagos após a data fornecida
     # itere sobre os pagamentos
     foreach($pagamentos as $pagto)
     {
@@ -320,7 +320,7 @@ try
 {
     //$b = new BoletoFacil($token,"",true); # modo sandbox
     $b = new BoletoFacil($token); # modo produção
-    $pagamentos = $b->buscarPagamentosPorDataConfirmacaoPagto('99/99/9999'); # busca os pagamentos que venceram após a data fornecida
+    $pagamentos = $b->buscarPagamentosPorDataConfirmacaoPagto('99/99/9999'); # busca os pagamentos que foram confirmados após a data fornecida
     # itere sobre os pagamentos
     foreach($pagamentos as $pagto)
     {
