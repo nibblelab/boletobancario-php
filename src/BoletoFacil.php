@@ -378,13 +378,13 @@ class BoletoFacil
     /**
      * Executa a requisição de busca propriamente dita
      * 
-     * @param FetchType $type parâmetro de busca para a data
+     * @param int $type parâmetro de busca para a data
      * @param string $data_inicial data inicial da busca
      * @param string $data_final data final da busca. Opcional
      * @return FetchResponse|null
      * @throws \Exception
      */
-    private function execFetchRequest(\BoletoFacil\Fetch\FetchType $type, $data_inicial, $data_final = ''): ?\BoletoFacil\Fetch\Response\FetchResponse 
+    private function execFetchRequest($type, $data_inicial, $data_final = ''): ?\BoletoFacil\Fetch\Response\FetchResponse 
     {
         if(empty($data_inicial))
         {

@@ -97,13 +97,13 @@ class FetchRequest extends Request
      * Requisita uma lista de pagamentos à API
      * 
      * @param array $config dados de configuração
-     * @param FetchType $type parâmetro de busca
+     * @param int $type parâmetro de busca
      * @param string $data_ini data inicial
      * @param string $data_end data final. Opcional
      * @return FetchResponse|null
      * @throws \BoletoFacil\Fetch\Exception
      */
-    public function request(array $config, \BoletoFacil\Fetch\FetchType $type, $data_ini, $data_end = ''): ?\BoletoFacil\Fetch\Response\FetchResponse 
+    public function request(array $config, $type, $data_ini, $data_end = ''): ?\BoletoFacil\Fetch\Response\FetchResponse 
     {
         try {
             $data = array(
