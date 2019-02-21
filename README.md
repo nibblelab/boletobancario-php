@@ -3,6 +3,13 @@
 
 A especificação da API pode ser encontrada em https://www.boletobancario.com/boletofacil/integration/integration.html
 
+
+## Pré requisitos
+
+* PHP >= 7.1.0
+* libcurl
+* composer
+
 ## Instalação
 
 Instale pelo composer
@@ -11,7 +18,9 @@ Instale pelo composer
 $ composer require nibblelab/boletobancario-php
 ```
 
+
 ## Requisição de Pagamento
+
 
 Para requisitar um pagamento primeiro crie os dados do mesmo, assim como quem está pagando
 
@@ -33,7 +42,9 @@ $pagador->setNome("Teste de Teste"); # nome do pagador
 $pagador->setCpfCnpj("099.999.999-99"); # CPF do pagador
 ```
 
+
 ### Pagamento via Boleto
+
 
 ```
 $token = "seu_token"; # token de produção ou sandbox
@@ -49,7 +60,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ### Pagamento via Carnê
+
 
 ```
 $item->setParcelas(2); # carnê possui duas ou mais parcelas
@@ -66,7 +79,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ### Pagamento via Cartão
+
 
 ```
 $token = "seu_token"; # token de produção ou sandbox
@@ -82,7 +97,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ### Pagamento via Cartão com antecipação de parcelas
+
 
 ```
 $token = "seu_token"; # token de produção ou sandbox
@@ -97,6 +114,7 @@ catch(Exception $ex)
     echo $ex->getMessage();
 }
 ```
+
 
 ### Pagamento via Cartão ou boleto
 
@@ -116,7 +134,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ### Pagamento Transparente via Cartão
+
 
 O hash do cartão é obrigatório nessa modalidade de pagamento. Instruções de como gerar esse campo estão em: https://www.boletobancario.com/boletofacil/integration/integration.html#credit_card_hash
 
@@ -146,7 +166,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ### Pagamento Transparente via Cartão com armazenamento de cartão
+
 
 O hash do cartão é obrigatório nessa modalidade de pagamento. Instruções de como gerar esse campo estão em: https://www.boletobancario.com/boletofacil/integration/integration.html#credit_card_hash
 
@@ -180,7 +202,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ## Notificação de Pagamento
+
 
 A API Boleto Fácil notifica as mudanças no status do pagamento para a url que informou durante a requisição de pagamento.
 
@@ -209,9 +233,12 @@ catch(Exception $ex)
 }
 ```
 
+
 ## Busca de pagamentos
 
+
 ### Pela data de vencimento
+
 
 ```
 include './vendor/autoload.php';
@@ -244,7 +271,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ### Pela data de pagamento
+
 
 ```
 include './vendor/autoload.php';
@@ -277,7 +306,9 @@ catch(Exception $ex)
 }
 ```
 
+
 ### Pela data de confirmação de pagamento
+
 
 ```
 include './vendor/autoload.php';
@@ -309,3 +340,8 @@ catch(Exception $ex)
     echo $ex->getMessage();
 }
 ```
+
+
+## License
+
+Este projeto está licenciado com Apache - veja [LICENSE.md](LICENSE.md) pra mais detalhes
