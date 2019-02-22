@@ -42,9 +42,9 @@ class Payment extends PaymentData
     /**
      * Obtêm a identificação única do cartão de crédito
      * 
-     * @return string
+     * @return string|null
      */
-    public function getCreditCardId(): string
+    public function getCreditCardId(): ?string
     {
         return $this->creditCardId;
     }

@@ -81,9 +81,9 @@ class NotificationResponseData
     /**
      * Obtêm o identificador único do pagamento no Boleto Fácil
      * 
-     * @return type
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -101,9 +101,9 @@ class NotificationResponseData
     /**
      * Obtêm o valor pago
      * 
-     * @return float
+     * @return float|null
      */
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -122,9 +122,9 @@ class NotificationResponseData
      * 
      * Obtêm a data do registro do pagamento na instituição financeira
      * 
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDate(): \DateTime
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
@@ -134,7 +134,7 @@ class NotificationResponseData
      * 
      * @param \DateTime $date
      */
-    public function setDate(\DateTime $date)
+    public function setDate($date)
     {
         $this->date = $date;
     }
@@ -142,9 +142,9 @@ class NotificationResponseData
     /**
      * Obtêm a taxa sobre o pagamento, em Reais.
      * 
-     * @return float
+     * @return float|null
      */
-    public function getFee(): float
+    public function getFee(): ?float
     {
         return $this->fee;
     }
@@ -161,9 +161,9 @@ class NotificationResponseData
     /**
      * Obtêm o código único de identificação da cobrança no Boleto Fácil
      * 
-     * @return int
+     * @return int|null
      */
-    public function getChargeCode(): int
+    public function getChargeCode(): ?int
     {
         return $this->charge_code;
     }
@@ -182,9 +182,9 @@ class NotificationResponseData
     /**
      * Obtêm o valor cobrado
      * 
-     * @return float
+     * @return float|null
      */
-    public function getChargeAmount(): float
+    public function getChargeAmount(): ?float
     {
         return $this->charge_amount;
     }
@@ -202,9 +202,9 @@ class NotificationResponseData
     /**
      * Obtêm o código de referência da cobrança
      * 
-     * @return string
+     * @return string|null
      */
-    public function getChargeReference(): string
+    public function getChargeReference(): ?string
     {
         return $this->charge_reference;
     }
@@ -223,9 +223,9 @@ class NotificationResponseData
     /**
      * Obtêm a data de vencimento do boleto ou parcela
      * 
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getChargeDueDate(): \DateTime
+    public function getChargeDueDate(): ?\DateTime
     {
         return $this->charge_dueDate;
     }

@@ -66,9 +66,9 @@ class NotificationResponse extends Response
     /**
      * Obtêm a referência do pagamento
      * 
-     * @return string
+     * @return string|null
      */
-    public function getPagtoReferencia(): string
+    public function getPagtoReferencia(): ?string
     {
         return $this->data->getChargeReference();
     }
@@ -76,9 +76,9 @@ class NotificationResponse extends Response
     /**
      * Obtêm o valor cobrado
      * 
-     * @return float
+     * @return float|null
      */
-    public function getValorCobrado(): float
+    public function getValorCobrado(): ?float
     {
         return $this->data->getChargeAmount();
     }
@@ -86,9 +86,9 @@ class NotificationResponse extends Response
     /**
      * Obtêm o valor pago
      * 
-     * @return float
+     * @return float|null
      */
-    public function getValorPago(): float
+    public function getValorPago(): ?float
     {
         return $this->data->getAmount();
     }
@@ -96,9 +96,9 @@ class NotificationResponse extends Response
     /**
      * Obtêm o valor das taxas
      * 
-     * @return float
+     * @return float|null
      */
-    public function getValorTaxas(): float
+    public function getValorTaxas(): ?float
     {
         return $this->data->getFee();
     }
@@ -106,9 +106,9 @@ class NotificationResponse extends Response
     /**
      * Obtêm a data de vencimento do boleto ou parcela
      * 
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDataVencimento(): \DateTime
+    public function getDataVencimento(): ?\DateTime
     {
         return $this->data->getChargeDueDate();
     }
@@ -116,11 +116,21 @@ class NotificationResponse extends Response
     /**
      * Obtêm a data de pagamento do boleto ou parcela
      * 
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDataPagto(): \DateTime
+    public function getDataPagto(): ?\DateTime
     {
         return $this->data->getDate();
+    }
+    
+    /**
+     * Obtêm o código único de identificação da cobrança no Boleto Fácil
+     * 
+     * @return int|null
+     */
+    public function getCode(): ?int
+    {
+        return $this->data->getChargeCode();
     }
 }
 

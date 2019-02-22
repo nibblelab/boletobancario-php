@@ -72,9 +72,9 @@ class FetchResponseData
     /**
      * Obtêm o código único de identificação da cobrança no Boleto Fácil
      * 
-     * @return int
+     * @return int|null
      */
-    public function getCode(): int
+    public function getCode(): ?int
     {
         return $this->code;
     }
@@ -93,9 +93,9 @@ class FetchResponseData
     /**
      * Obtêm a data de vencimento do boleto ou parcela
      * 
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDueDate(): \DateTime
+    public function getDueDate(): ?\DateTime
     {
         return $this->dueDate;
     }

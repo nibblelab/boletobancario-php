@@ -76,9 +76,9 @@ class Charge
     /**
      * Obtêm o código único de identificação da cobrança no Boleto Fácil
      * 
-     * @return int
+     * @return int|null
      */
-    public function getCode(): int
+    public function getCode(): ?int
     {
         return $this->code;
     }
@@ -97,9 +97,9 @@ class Charge
     /**
      * Obtêm o código de referência da cobrança
      * 
-     * @return string
+     * @return string|null
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
         return $this->reference;
     }
@@ -118,9 +118,9 @@ class Charge
     /**
      * Obtêm a data de vencimento do boleto ou parcela
      * 
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDueDate(): \DateTime
+    public function getDueDate(): ?\DateTime
     {
         return $this->dueDate;
     }
@@ -139,9 +139,9 @@ class Charge
     /**
      * Obtêm o link para visualização/download do boleto ou carnê
      * 
-     * @return string
+     * @return string|null
      */
-    public function getLink(): string
+    public function getLink(): ?string
     {
         return $this->link;
     }
@@ -160,9 +160,9 @@ class Charge
     /**
      * Obtêm o link da página de checkout da cobrança
      * 
-     * @return string
+     * @return string|null
      */
-    public function getCheckoutUrl(): string
+    public function getCheckoutUrl(): ?string
     {
         return $this->checkoutUrl;
     }
@@ -181,9 +181,9 @@ class Charge
     /**
      * Obtêm o link para visualização/download do boleto (em caso de parcelamento)
      * 
-     * @return string
+     * @return string|null
      */
-    public function getInstallmentLink(): string
+    public function getInstallmentLink(): ?string
     {
         return $this->installmentLink;
     }
@@ -202,9 +202,9 @@ class Charge
     /**
      * Obtêm a linha digitável para pagamento online
      * 
-     * @return string
+     * @return string|null
      */
-    public function getPayNumber(): string
+    public function getPayNumber(): ?string
     {
         return $this->payNumber;
     }

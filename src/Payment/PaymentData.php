@@ -69,9 +69,9 @@ class PaymentData
     /**
      * Obtêm o identificador único do pagamento no Boleto Fácil
      * 
-     * @return type
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -89,9 +89,9 @@ class PaymentData
     /**
      * Obtêm o valor pago
      * 
-     * @return float
+     * @return float|null
      */
-    public function getAmount(): float
+    public function getAmount(): ?float
     {
         return $this->amount;
     }
@@ -110,9 +110,9 @@ class PaymentData
      * 
      * Obtêm a data do registro do pagamento na instituição financeira
      * 
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getDate(): \DateTime
+    public function getDate(): ?\DateTime
     {
         return $this->date;
     }
@@ -130,9 +130,9 @@ class PaymentData
     /**
      * Obtêm a taxa sobre o pagamento, em Reais.
      * 
-     * @return float
+     * @return float|null
      */
-    public function getFee(): float
+    public function getFee(): ?float
     {
         return $this->fee;
     }
@@ -150,9 +150,9 @@ class PaymentData
     /**
      * Obtêm o tipo de pagamento
      * 
-     * @return string
+     * @return string|null
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -170,9 +170,9 @@ class PaymentData
     /**
      * Obtêm a situação do pagamento
      * 
-     * @return string
+     * @return string|null
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
