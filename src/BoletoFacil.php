@@ -53,6 +53,7 @@ class BoletoFacil
         'responseType' => Config::RESPONSE_TYPE,
         'paymentTypes' => '',
         'creditCardHash' => '',
+        'referralToken' => '',
         'creditCardStore' => false,
         'creditCardId' => '',
         'paymentAdvance' => false,
@@ -98,13 +99,35 @@ class BoletoFacil
     public function __construct($token, $url_notificacao = '', $sandbox = false)
     {
         $this->config['token'] = $token;
+
         if($sandbox) {
             $this->config['url'] = Config::SANDBOX_URL;
-        }
-        else {
+        } else {
             $this->config['url'] = Config::PRODUCTION_URL;
         }
+
         $this->config['notificationUrl'] = $url_notificacao;
+    }
+
+    /**
+     * Obtêm o código de referência do parceiro
+     *
+     * @return string
+     */
+    public function getReferralToken(): string
+    {
+        return $this->config['referralToken'];
+    }
+
+    /**
+     * Seta o código de referência do parceiro
+     *
+     * @param string $token
+     * @return void
+     */
+    public function setReferralToken($token): void
+    {
+        $this->config['referralToken'] = $token;
     }
     
     /**
@@ -345,6 +368,7 @@ class BoletoFacil
             $this->pagamento = $pagamento;
             $this->pagador = $pagador;
             $this->response_payment = $this->execPayRequest();
+
             if($this->response_payment->hasError()){
                 throw new \Exception("O resultado não pode ser obtido: " . $this->response_payment->getError(),Errors::REQUEST_ERROR);
             }

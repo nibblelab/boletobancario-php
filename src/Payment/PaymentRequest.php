@@ -152,6 +152,12 @@ class PaymentRequest extends Request
                 'responseType' => $config['responseType'],
                 'paymentTypes' => $config['paymentTypes']
             );
+
+            if(!empty($config['referralToken'])) {
+                // checkout transparente de pagamento via cartão
+                $data['referralToken'] = $config['referralToken'];
+            }
+
             if(!empty($config['creditCardHash'])) {
                 // checkout transparente de pagamento via cartão
                 $data['creditCardHash'] = $config['creditCardHash'];
