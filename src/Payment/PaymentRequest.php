@@ -154,7 +154,6 @@ class PaymentRequest extends Request
             );
 
             if(!empty($config['referralToken'])) {
-                // checkout transparente de pagamento via cartão
                 $data['referralToken'] = $config['referralToken'];
             }
 
