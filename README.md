@@ -345,3 +345,4 @@ catch(Exception $ex)
 ## License
 
 Este projeto está licenciado com Apache - veja [LICENSE.md](LICENSE.md) pra mais detalhes
+
